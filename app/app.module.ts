@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -17,7 +17,11 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserService } from './services/user.service';
-
+import { ObservableDemoComponent } from './observable-demo/observable-demo.component';
+import { AuthInterceptor }  from './services/auth-interceptor';
+import { LoggerInterceptor }  from './services/logger-Interceptor';
+import { LoginGuardService } from './services/login-guard.service';
+import { APP_ROUTES } from './app.routing';
 
 
 @NgModule({
@@ -31,15 +35,26 @@ import { UserService } from './services/user.service';
     FilterPipe,
     SigninComponent,
     SignupComponent,
+    ObservableDemoComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [ UserService ],
+  providers: [ UserService, LoginGuardService, {
+    provide : HTTP_INTERCEPTORS,
+    useClass : AuthInterceptor,
+    multi : true
+  },
+  {
+    provide : HTTP_INTERCEPTORS,
+    useClass : LoggerInterceptor,
+    multi : true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
