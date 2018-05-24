@@ -15,13 +15,12 @@ export class ObservableDemoComponent implements OnInit {
   unsubInterval : any;
 
   unsub(){
-    this.unsubInterval.Unsubscribe();
+    this.unsubInterval.unsubscribe();
     console.log("In Unsubscribe");
   }
 
   constructor() { 
-    this.unsubInterval = Observable.interval(1000);
-    Observable.interval(1000).subscribe((num)=>this.num = num); 
+    this.unsubInterval = Observable.interval(1000).subscribe((num)=>this.num = num); 
     console.log(this.num);
 
     Observable.create((observer)=>{

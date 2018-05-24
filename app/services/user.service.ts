@@ -20,7 +20,7 @@ export class UserService {
 
     getApiData(){
         console.log("Get Data from API");
-        this.httpClient.get<User[]>("https://sg-app-55a60.firebaseio.com/userdata.json")
+        return this.httpClient.get<User[]>("https://sg-app-55a60.firebaseio.com/userdata.json")
         .subscribe((data)=>console.log(data)+"sdsd",
         err=>console.log(err),
         ()=>console.log("Completed"));

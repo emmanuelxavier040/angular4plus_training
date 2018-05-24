@@ -22,6 +22,9 @@ import { AuthInterceptor }  from './services/auth-interceptor';
 import { LoggerInterceptor }  from './services/logger-Interceptor';
 import { LoginGuardService } from './services/login-guard.service';
 import { APP_ROUTES } from './app.routing';
+import { EmployeeComponent } from './employee/employee.component';
+import { PersonalComponent } from './employee/personal/personal.component';
+import { ProfessionalComponent } from './employee/professional/professional.component';
 
 
 @NgModule({
@@ -36,6 +39,9 @@ import { APP_ROUTES } from './app.routing';
     SigninComponent,
     SignupComponent,
     ObservableDemoComponent,
+    EmployeeComponent,
+    PersonalComponent,
+    ProfessionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,7 @@ import { APP_ROUTES } from './app.routing';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
   ],
   providers: [ UserService, LoginGuardService, {
     provide : HTTP_INTERCEPTORS,
