@@ -1,0 +1,66 @@
+<div>
+    <h1>User Component Loaded!!!</h1>
+    <h1>{{ title }}!</h1>
+    <!-- {{users | json}} -->    
+    <h2>
+        <ng-content select="header"></ng-content>
+    </h2>
+    <p>
+        <ng-content select=".main-class"></ng-content>
+        Child Control :
+        <input type="text" (keyup)="onKeyUp(childControl.value)" #childControl>
+    </p>
+    <div class="container">
+        <ul class="list-unstyled">
+            <li class="well" *ngFor="let user of users; index as i, even as isEven">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                        <!-- {{i}} Is Even? {{isEven}} -->
+                        <img [src]="user.image" class="img-responsive img-circle" width="125px" height="175px">
+                        <br>
+                        <button (click)="moreInfo(user)" class="btn btn-primary btn-sm">More Info</button>
+                    </div>
+
+                    <div class="col-md-8 col-sm-8">
+                        <h1 appHighlight
+                            [defaultColor]="'transparent'" 
+                            [newColor]="'aqua'" 
+                            class="text-center text-primary">
+                            {{user.firstName| uppercase}} {{user.lastName | uppercase}}
+                        </h1>
+                        <p [ngClass]="{'dob':true,'feature':false}">Date of Birth : {{user.dob | date : 'MM/dd/yyyy'}}</p>
+                        <p [ngClass]="myClasses" [ngStyle]="bgColor">Testing the Background color</p>
+                        <p *ngIf="user.isWorking; else ElseTemplate">Income :
+                            <span [innerHTML]="user.income | currency : 'INR'"></span>
+                        </p>
+
+                        <ng-template [appUnless]="user.isWorking">
+                            <p>Unless directive Working</p>
+                        </ng-template>
+                        <p *appUnless="user.isWorking">Unless directive Working</p>
+
+
+                        <em class="pull-right">Total Votes : {{user.vote}} </em>
+                        <p>
+                            <input type="number" [value]="user.vote" (change)="user.vote=$event.target.value">
+                            <input type="number" [(ngModel)]="user.vote">
+                        </p>
+                    </div>
+                </div>
+                <ng-template #ElseTemplate>
+                    {{user.firstName}} is not working now!
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</div>
+<h2>
+    <ng-content select="footer"></ng-content>
+</h2>
+
+<div [ngSwitch]="myNum">
+    <div *ngSwitchCase="'1'">Output1</div>
+    <div *ngSwitchCase="'2'">Output2</div>
+    <div *ngSwitchCase="'3'">Output3</div>
+    <div *ngSwitchDefault>OutputDefault for ngSwitch</div>
+</div>

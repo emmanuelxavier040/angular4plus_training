@@ -1,0 +1,19 @@
+<p>
+  pipe-demo works!
+</p>
+
+<h1>
+  Custom pipe Applied : {{ 8756453423 | nationalCode : '80'}}
+</h1>
+
+
+<h2> Some Data : {{someData | async }}</h2>
+
+
+<input type="text" [(ngModel)]="filteredStatus">
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let todo of todos | filter : filteredStatus : 'status'">
+    {{todo.label}}
+    <span class="badge">{{todo.status}}</span>
+  </li>
+</ul>

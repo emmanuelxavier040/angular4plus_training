@@ -1,0 +1,34 @@
+<h2> Counter in Sign UP : {{userService.counter}}</h2>
+<button (click)="userService.increase()">increase from Sign up</button>
+
+<form #f="ngForm" class="form-vertical well" [formGroup]="registerForm">
+  <h2 class="text-center text-align">Register</h2>
+  <div class="form-group">
+    <label for="username">Username : </label>
+    <input type="text" name="username" class="form-control" [formControl]="username">
+    <div class="continer" [hidden]="username.valid || username.untouched">
+      Some Problem with username field!!!
+      <div [hidden]="!username.hasError('required')">
+        Username is required Field!
+      </div>
+      <div [hidden]="!username.hasError('minlength')">
+        Username is requires MinLength 6!
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password : </label>
+    <input type="password" name="password" class="form-control" [formControl]="password">
+    <div class="continer" [hidden]="password.valid || password.untouched">
+      <div [hidden]="!password.hasError ('needExclamation')">
+        password requires exclamation!
+      </div>
+    </div>
+
+  </div>
+
+  <button (click)="register()" class="btn btn-info btn-lg">Register</button>
+
+</form>

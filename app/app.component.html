@@ -1,0 +1,24 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>Welcome to {{parentValue}}</h1>
+</div>
+<ul>
+    Counter Value In Root: {{userService.counter}}  
+
+    <div class="container">
+        <app-signup></app-signup>
+      </div>
+
+  <div class="container">
+    <app-signin></app-signin>
+  </div>
+  <div class="container">
+    <app-pipe-demo></app-pipe-demo>
+  </div>
+
+  <app-user [users]="users"[aliasFortitle]="title" (childEvent)="parentEvent($event)">
+    <header>Header Info</header>
+    <main class="main-class">main content</main>
+    <footer>Footer info</footer>
+  </app-user>
+</ul>
